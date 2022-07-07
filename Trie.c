@@ -17,7 +17,7 @@ int *create_map(void)
 }
 
 int find_in_alphabet(char c, int **map) {
-    // printf("Find in alphabet %c %d\n", c, (*map)[c - 32]);
+    // Use map instead of iterating over alphabet
     return (*map)[c - 32];
     
     /* for (int i = 0; i < strlen(ALPHABET); i++) {
@@ -123,14 +123,13 @@ void search(struct Trie *head, char *str, int **map)
     searchAndPrintRec2(curr);
 }
 
-// Recursive function to search a string in a Trie. It returns 1
-// if the string is found in the Trie; otherwise, it returns 0.
+// Recursive function to print all leafs under the 
+// provided node.
 void searchAndPrintRec2(struct Trie *head)
 {
-    // printf("Not found") if Trie is empty
     if (head == NULL)
     {
-        printf("Not found 3\n");
+        printf("Not found\n");
         return;
     }
     if (head->isLeaf == 1)
@@ -148,39 +147,6 @@ void searchAndPrintRec2(struct Trie *head)
         }
     }
 }
-
-// Recursive function to search a string in a Trie. It returns 1
-// if the string is found in the Trie; otherwise, it returns 0.
-void searchAndPrintRec(struct Trie *head, char *curr_prefix)
-{
-    return;
-    // printf("Not found") if Trie is empty
-    if (head == NULL)
-    {
-        printf("Not found 3\n");
-        return;
-    }
-    if (head->isLeaf == 1)
-    {
-        // printf("Found %s\n", curr_prefix);
-        ;
-    }
-    int found = 0;
-    for (int i = 0; found < head->children; i++) 
-    {
-        if (head->character[i]) 
-        {
-            found = found + 1;
-            char *new_prefix = malloc(sizeof(char) * strlen(curr_prefix) + 2);
-            new_prefix[strlen(curr_prefix) + 1] = '\0';
-            strcpy(new_prefix, curr_prefix);
-            new_prefix[strlen(curr_prefix)] = ALPHABET[i];
-            searchAndPrintRec(head->character[i], new_prefix);
-            free(new_prefix);
-        }
-    }
-}
-
 
 // Returns 1 if a given Trie node has any children
 int hasChildren(struct Trie *curr)
@@ -251,7 +217,6 @@ int deletion(struct Trie **curr, char *str, int **map)
     return 0;
 }
 
-// Trie implementation in C – Insertion, Searching, and Deletion
 void createTrie()
 {
     int *map;
@@ -259,14 +224,13 @@ void createTrie()
     struct Trie *head = getNewTrieNode();
     if (head == NULL)
     {
-        printf("Trie empty!!\n"); // Trie is empty now
+        printf("Trie empty\n"); // Trie is empty now
     }
     // FILE* stream = fopen("test.csv", "r");
     FILE* stream = fopen("names_only.csv", "r");
     if (stream == NULL) {
         return;
     }
-
     char line[64];
     while (fgets(line, 64, stream) != NULL)
     {
@@ -322,5 +286,6 @@ void createTrie()
 int main()
 {
     createTrie();
+    return 0;
 
 }
