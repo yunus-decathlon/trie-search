@@ -44,7 +44,6 @@ struct Trie *getNewTrieNode()
     return node;
 }
 
-// Iterative function to insert a string into a Trie
 void insert(struct Trie *head, char *str, int **map)
 {
     char *tmp = str;
@@ -83,8 +82,6 @@ void insert(struct Trie *head, char *str, int **map)
     curr->isLeaf = 1;
 }
 
-// Iterative function to search a string in a Trie. It returns 1
-// if the string is found in the Trie; otherwise, it returns 0.
 void search(struct Trie *head, char *str, int **map)
 {
     if (str == NULL || strlen(str) == 0) {
@@ -96,7 +93,7 @@ void search(struct Trie *head, char *str, int **map)
     }
     char *tmp = str;
 
-    // return 0 if Trie is empty
+    // return if Trie is empty
     if (head == NULL)
     {
         printf("Not found 1\n");
@@ -119,7 +116,6 @@ void search(struct Trie *head, char *str, int **map)
         // move to the next character
         str++;
     }
-    // printf("%s exists!\n", tmp);
     searchAndPrintRec2(curr);
 }
 
