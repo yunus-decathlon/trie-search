@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Server.h"
+#include "Trie.h"
 #include <unistd.h>
 #include <time.h>
 #include <ctype.h>
@@ -263,6 +263,9 @@ void createTrie()
     }
     // FILE* stream = fopen("test.csv", "r");
     FILE* stream = fopen("names_only.csv", "r");
+    if (stream == NULL) {
+        return;
+    }
 
     char line[64];
     while (fgets(line, 64, stream) != NULL)
